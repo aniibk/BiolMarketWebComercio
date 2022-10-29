@@ -1,0 +1,45 @@
+﻿@model WebComercio.Usuario
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutLoginRegistro.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="col-4 ml-auto mr-auto">
+
+                <div class="text-center">
+                    <img src="~/IMG/usuarios/userLogin.png" alt="Login" width="250" height="250" class="my-3" />
+                    <h1>Ingresar</h1>
+                </div>
+
+                <div class="text-success">
+                    @ViewBag.Mensaje
+                </div>
+
+                <form asp-action="Login" class="my-4">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Cuil" class="control-label">CUIL</label>
+                        <input asp-for="Cuil" class="form-control" required />
+                        <span asp-validation-for="Cuil" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password" value="Cuil" class="control-label">Contraseña</label>
+                        <input type= "password" asp-for="Password" class="form-control" required/>
+                        <span asp-validation-for="Password" value="Contraseña " class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Login" class="btn btn-primary btn-block" />
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<WebComercio.Compra>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container my-5">
+    <div class="row">
+        <h1>Compras</h1> <img class="ml-2" src="~/IMG/compras/compras.png" alt="compras" width="53" height="53">
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col -md-12">
+            <table class="table table-striped my-2 text-center">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CompraId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.idUsuario)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Total)
+                        </th>
+                        <th>Accion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CompraId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.idUsuario)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Total)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.CompraId"><img src="~/IMG/usuarios/editar.png" data-bs-toggle="tooltip" title="Editar"></a>
+
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

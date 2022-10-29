@@ -1,0 +1,56 @@
+﻿@model WebComercio.Usuario
+
+@{
+    ViewData["Title"] = "Mis Datos";
+    Layout = "~/Views/Shared/_LayoutMercado.cshtml";
+}
+<div class="container"
+    <div class="container my-5">
+        <div class="row"> </div>
+        <h1> <a href="/Mercado/?identificador=@ViewBag.identificador"><img src="~/IMG/usuarios/volver.png" data-bs-toggle="tooltip" title="Pagina anterior"></a> Mis Datos</h1>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="container">
+            <div class="col">
+                <dl class="row tabletable-striped">
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Cuil)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Cuil)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Nombre)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Nombre)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Apellido)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Apellido)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Mail)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Mail)
+                    </dd>
+                    
+                    <div class="text-right col-md-6 pr-5 mt-3">
+                        <a href="/Mercado/EditData/@Model.UsuarioId?identificador=@ViewBag.identificador"> <img src="~/IMG/usuarios/editar.png" data-bs-toggle="tooltip" title="Ver detalle"> Editar Datos</a>
+                    </div>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+       
+    
+

@@ -1,0 +1,195 @@
+﻿@model IEnumerable<WebComercio.Producto>
+
+
+@{
+    ViewData["Title"] = "Mercado";
+    Layout = "~/Views/Shared/_LayoutMercado.cshtml";
+}
+
+
+
+<div class="mb-5 my-5">
+    <h1>¡Bienvenido!</h1>
+
+</div>
+
+
+<div>
+    @if (ViewBag.Mensaje != null)
+    {
+        if (ViewBag.Mensaje == "1")
+        {
+            <div class='alert alert-success alert-dismissable' id='alert'>
+                <button type='button' class='close' data-dismiss='alert'>×</button>
+                <strong>Su compra se realizó con exito</strong>
+
+            </div>
+        }
+        else if (ViewBag.Mensaje == "2")
+        {
+            <div class='alert alert-danger alert-dismissable' id='alert'>
+                <button type='button' class='close' data-dismiss='alert'>×</button>
+                <strong>Hay productos sin stock y otros con menor cantidad que la solicitada. Revise su carro por favor</strong>
+
+            </div>
+        }
+        else if (ViewBag.Mensaje == "3")
+        {
+            <div class='alert alert-danger alert-dismissable' id='alert'>
+                <button type='button' class='close' data-dismiss='alert'>×</button>
+                <strong>Hay productos sin stock. Revise su carro por favor</strong>
+
+            </div>
+        }
+        else if (ViewBag.Mensaje == "4")
+        {
+            <div class='alert alert-danger alert-dismissable' id='alert'>
+                <button type='button' class='close' data-dismiss='alert'>×</button>
+                <strong>Modificamos la cantidad de productos en el carro por falta de stock. Revise su carro por favor</strong>
+
+            </div>
+        }
+        else if (ViewBag.Mensaje == "5")
+        {
+            <div class='alert alert-danger alert-dismissable' id='alert'>
+                <button type='button' class='close' data-dismiss='alert'>×</button>
+                <strong>Hubo un error al procesar su compra. Intente de nuevo por favor</strong>
+
+            </div>
+        }
+        else if (ViewBag.Mensaje == "6")
+        {
+            <div class='alert alert-success alert-dismissable' id='alert'>
+                <button type='button' class='close' data-dismiss='alert'>×</button>
+                <strong>Carro actualizado</strong>
+
+            </div>
+        }
+    }
+</div>
+
+<hr />
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+
+            <form class="" asp-controller="Mercado" asp-action="Index" method="get">
+
+                <h5>Buscar <img src="~/IMG/mercado/buscar.png" alt="buscar" width="25" height="25" /></h5>
+                <input class="form-control" type="text" name="searchString" placeholder="Ingrese un producto" value="@ViewData["CurrentFilter"]" />
+                <input type="hidden" name="identificador" value="@ViewBag.identificador" />
+                <fieldset class="my-3">
+                    <ul class="list-unstyled">
+                        <li>
+                            <input type="radio" id="contactChoice1"
+                                   name="orderByName" value="1">
+                            <label for="contactChoice1">A-Z</label>
+                        </li>
+                        <li>
+                            <input type="radio" id="contactChoice2"
+                                   name="orderByName" value="-1">
+                            <label for="contactChoice2">Z-A</label>
+                        </li>
+                        <li>
+                            <input type="radio" id="contactChoice1"
+                                   name="orderByPrice" value="1">
+                            <label for="contactChoice1">↑ Precio</label>
+                        </li>
+                        <li>
+                            <input type="radio" id="contactChoice2"
+                                   name="orderByPrice" value="-1">
+                            <label for="contactChoice2">↓ Precio</label>
+                        </li>
+                    </ul>
+                    <input type="submit" value="Aplicar" class="btn btn-primary btn-block" />
+                </fieldset>
+
+            </form>
+            <hr />
+            <form class="" asp-controller="Mercado" asp-action="Index" method="get">
+
+
+                <select class="form-control" name="Cat">
+                    <option selected>Categoría</option>
+                    @{
+                        foreach (var item in @ViewBag.categorias)
+                        {
+                            <option value="@item.Nombre">
+                                @item.Nombre
+                            </option>
+                        }
+                    }
+                </select>
+                <input type="hidden" name="identificador" value="@ViewBag.identificador" />
+                <input type="submit" value="Filtrar" class="btn btn-primary my-3 btn-block" />
+
+
+            </form>
+        </div>
+
+        <div class="col-md-9">
+            <form method="get" asp-action="Details">
+
+                <table class="table table-striped my-2 text-center">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.ActionLink("Nombre", "Index", new { sortOrder = ViewBag.NameSortParm, identificador = ViewBag.identificador })
+                                <img src="~/IMG/mercado/ordenar.png" alt="ordenar" width="15" height="15" />
+                            </th>
+                            <th>
+                                @Html.ActionLink("Precio", "Index", new { sortOrder = ViewBag.PriceSortParm, identificador = ViewBag.identificador })
+                                <img src="~/IMG/mercado/ordenar.png" alt="ordenar" width="15" height="15" />
+                            </th>
+                            <th>
+                                @Html.ActionLink("Cantidad", "Index", new { sortOrder = ViewBag.AmountSortParm, identificador = ViewBag.identificador })
+                                <img src="~/IMG/mercado/ordenar.png" alt="ordenar" width="15" height="15" />
+                            </th>
+                            <th>
+                                @Html.ActionLink("Categoria", "Index", new { sortOrder = ViewBag.CategorySortParm, identificador = ViewBag.identificador })
+                                <img src="~/IMG/mercado/ordenar.png" alt="ordenar" width="15" height="15" />
+                            </th>
+                            <th>
+                                @Html.ActionLink("Agregar", "Index", new { identificador = ViewBag.identificador })
+                            </th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @item.Nombre
+                                </td>
+                                <td>
+                                    @item.Precio
+                                </td>
+                                <td>
+                                    @item.Cantidad
+                                </td>
+                                <td>
+                                    @item.Cat.Nombre
+                                </td>
+                                <td>
+                                    <a href="/Mercado/Details/@item.ProductoId?identificador=@ViewBag.identificador">
+                                        <img src="~/IMG/mercado/agregar.png" data-bs-toggle="tooltip" title="Agregar al carro" alt="agregar" width="30" height="30" />
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+
+
+
+

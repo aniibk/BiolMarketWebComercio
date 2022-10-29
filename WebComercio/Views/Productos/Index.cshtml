@@ -1,0 +1,96 @@
+﻿@model IEnumerable<WebComercio.Producto>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container my-5">
+    <div class="row">
+        <h1>Productos</h1> <img class="ml-2" src="~/IMG/productos/productos.png" alt="productos" width="45" height="45">
+    </div>
+</div>
+
+@if (TempData["TipoMensaje"] != null)
+{
+    @if ((int)TempData["TipoMensaje"] == 1)
+    {
+        <div class='alert alert-danger alert-dismissable' id='alert'>
+            <button type='button' class='close' data-dismiss='alert'>×</button>
+            <strong>@TempData["Mensaje"]</strong>
+
+        </div>
+    }
+
+    @if ((int)TempData["TipoMensaje"] == 2)
+    {
+        <div class='alert alert-success alert-dismissable' id='alert'>
+            <button type='button' class='close' data-dismiss='alert'>×</button>
+            <strong>@TempData["Mensaje"]</strong>
+        </div>
+    }
+
+}
+
+<div class="container my-5">
+    <div class="row">
+
+        <div class="col-md-12">
+            <h5><b>Agregar</b>  <a asp-action="Create" class="text-right"><img src="~/IMG/productos/agregarProducto.png" width="33" height="33"></a> </h5>
+        </div>
+
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col -md-12">
+            <table class="table table-striped my-2 text-center">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nombre)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Precio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Cantidad)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Cat)
+                        </th>
+                        <th scope="col">
+                            Accion
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Precio)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Cantidad)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Cat.Nombre)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.ProductoId"><img src="~/IMG/usuarios/editar.png" data-bs-toggle="tooltip" title="Editar"></a>
+                                <a asp-action="Details" asp-route-id="@item.ProductoId"><img src="~/IMG/usuarios/detalles.png" data-bs-toggle="tooltip" title="Detalles"></a>
+                                <a asp-action="Delete" asp-route-id="@item.ProductoId"><img src="~/IMG/usuarios/eliminar.png" data-bs-toggle="tooltip" title="Eliminar"></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
